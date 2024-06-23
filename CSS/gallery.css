@@ -1,0 +1,13 @@
+.scroll_img{
+    margin: 0px;
+    background-color: rgb(58, 56, 53);
+    height: 450px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: 12px;
+    white-space:nowrap;
+
+}
+.scroll_img img{
+    height:100%;
+}

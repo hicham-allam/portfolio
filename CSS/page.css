@@ -9,16 +9,16 @@ p{
 }
 p:hover{
     transition: 0.3s;
-    color: aquamarine;
+    color: rgb(149, 149, 3);
 }
 .paragraph{
     font-family: monospace;
     font-size: 16px;
-    background-color: rgb(160, 163, 180);
+    background-color: rgb(211, 225, 228);
     color: black;
 }
 div{
-    background-color: rgba(238, 241, 242,0.3);
+    background-color: rgba(158, 167, 169, 0.3);
     margin: auto;
     padding: 15px 0px 15px 0px;
     text-align: center;
