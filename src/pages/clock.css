@@ -1,0 +1,161 @@
+body {
+  font-weight: bold;
+  font-size: large;
+  margin: 0;
+  padding: 0;
+  color: black;
+  background: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.clock-container {
+  border-radius: 50%;
+  border: solid 3px greenyellow;
+  position: relative;
+  width: 90vw;
+  height: 90vw;
+  max-width: 400px;
+  max-height: 400px;
+  margin: auto;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 30px greenyellow;
+}
+
+.clock {
+  position: absolute;
+  top: 30%;
+  left: 28%;
+  width: 100px;
+  color: white;
+  border: solid greenyellow 2px;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  opacity: 0.4;
+  background-color: rgba(0, 0, 0, 0.5);
+  /*
+  animation: clockGlow 2s ease-in-out infinite alternate;
+  */
+}
+
+.clock-sound-btn {
+  position: absolute;
+  top: 30%;
+  left: 62%;
+  width: 50px;
+  color: white;
+  border: solid greenyellow 2px;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  opacity: 0.4;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.date {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #111;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.arrow-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.6, 1);
+  z-index: 4;
+}
+
+.arrow-hand::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 120%;
+  height: 20px;
+  transform: translateX(-50%);
+  opacity: 0;
+  filter: blur(10px);
+  animation: waterTrail 1s infinite;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 80px;
+  background: #111;
+  box-shadow: 0 0 10px;
+  z-index: 3;
+}
+
+.hour-hand::after {
+  background: radial-gradient(greenyellow, transparent 70%);
+}
+
+.minute-hand {
+  width: 2.5px;
+  height: 110px;
+  background: #00ff00;
+  box-shadow: 0 0 8px #00ff00;
+  z-index: 4;
+}
+
+.minute-hand::after {
+  background: radial-gradient(#00ff00, transparent 70%);
+}
+
+.second-hand {
+  width: 2px;
+  height: 150px;
+  background: #ff0000;
+  box-shadow: 0 0 6px #ff0000;
+  z-index: 5;
+}
+
+.second-hand::after {
+  background: radial-gradient(#ff0000, transparent 70%);
+}
+
+.center-point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 6px greenyellow;
+  z-index: 6;
+}
+
+@keyframes waterTrail {
+  0% {
+    opacity: 0.8;
+    height: 0;
+  }
+  50% {
+    opacity: 0.4;
+    height: 30px;
+  }
+  100% {
+    opacity: 0;
+    height: 60px;
+  }
+}
+
+@keyframes clockGlow {
+  from {
+    opacity: 0.6;
+    box-shadow: 0 0 5px greenyellow;
+  }
+  to {
+    opacity: 0.9;
+    box-shadow: 0 0 15px greenyellow;
+  }
+}
