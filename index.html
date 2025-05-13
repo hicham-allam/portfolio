@@ -3,28 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="React application built with Vite" />
-    <link rel="icon" type="image/png" href="/src/assets/hicham-allam-logo.png" />
+    <meta name="description" content="Hicham Allam's Portfolio" />
+    
+    <!-- Favicon with absolute path -->
+    <link rel="icon" type="image/png" href="/assets/hicham-allam-logo.png" />
     <title>Hicham Allam | Portfolio</title>
-    <!-- Preconnect to improve performance -->
+    
+    <!-- Preconnect for fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Preload critical resources -->
-    <link rel="preload" as="script" href="/src/main.jsx">
-    <!-- Mobile address bar theming -->
+    
+    <!-- CORRECTED Preload for JS (using .js extension) -->
+    <link 
+      rel="modulepreload" 
+      href="/assets/main.js" 
+      as="script"
+      crossorigin="anonymous"
+    >
+    
+    <!-- Preload CSS if needed -->
+    <link 
+      rel="preload" 
+      href="/assets/main.css" 
+      as="style"
+    >
+    
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
-    <!-- React root - Keep this as the only element -->
     <div id="root"></div>
     
-    <!-- Script with defer for better loading -->
-    <script type="module" src="/src/main.jsx" defer></script>
+    <!-- CORRECTED: Load built JS file (not .jsx) -->
+    <script type="module" src="/assets/main.js" defer></script>
     
-    <!-- Fallback for no-JS users -->
     <noscript>
-      <h1>JavaScript is required to run this application</h1>
-      <p>Please enable JavaScript in your browser settings.</p>
+      <h1>JavaScript is required</h1>
+      <p>Please enable JavaScript to view this portfolio.</p>
     </noscript>
   </body>
 </html>
