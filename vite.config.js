@@ -9,5 +9,9 @@ export default defineConfig({
       plugins: [tailwindcss()] // ← Force-inject Tailwind
     }
   },
-  base: "/portfolio",
+  base: '/portfolio/',
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+  },
 })
