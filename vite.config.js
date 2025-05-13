@@ -9,7 +9,7 @@ export default defineConfig({
       plugins: [tailwindcss()] // ← Force-inject Tailwind
     }
   },
-  base: '/portfolio/',
+  base: '/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
