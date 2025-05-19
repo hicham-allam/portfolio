@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anonymous Prompt to Hugging Face</title>
+</head>
+<body>
+  <h2>Anonymous Prompt Generator (Hugging Face UI)</h2>
+  <form onsubmit="loadPrompt(); return false;">
+    <input id="prompt" type="text" placeholder="Enter your prompt" style="width:300px;" />
+    <button type="submit">Submit</button>
+  </form>
+  <br>
+  <iframe id="modelFrame" width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
+
+  <script>
+    function loadPrompt() {
+      const prompt = document.getElementById("prompt").value;
+      const encoded = encodeURIComponent(prompt);
+      const url = `https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1?text=${encoded}`;
+      document.getElementById("modelFrame").src = url;
+    }
+  </script>
+</body>
+</html>

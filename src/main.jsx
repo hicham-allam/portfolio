@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'; //tilwindcss
 
-import App from './App';
 import Clock from './pages/Clock';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
@@ -22,7 +21,6 @@ createRoot(document.getElementById('root')).render(
         <Route path="/login" element={<Login />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/template" element={<App />} />
         <Route path="*" element={<NotFound />} /> {/* 404 page */}
       </Routes>
     </Router>

@@ -1,20 +1,29 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './clock.css';
 //import paraoxinigBeatz from '../assets/ParoxingBeatz - Logobi Type Beat.flac';
 import Logo from '../assets/hicham-allam-logo.png';
 import Engineer from '../assets/hicham-allam-dark.png';
+
+import html_svg from '../assets/html.svg';
+import css_svg from '../assets/css.svg';
+import javascript_svg from '../assets/javascript.svg';
+import git_svg from '../assets/git.svg';
+import tailwind_svg from '../assets/tailwind.svg';
+import wordpress_svg from '../assets/wordpress.svg';
+import react_svg from '../assets/react.svg';
 
 export default Home;
 
 function Home() {
   return (<>
   <div 
-    className="fixed inset-0 -z-50 bg-[url('/src/assets/tenor.gif')] bg-cover bg-center opacity-15 blur-[80px]"
+    className="fixed inset-0 -z-50 bg-[url('/src/assets/tenor.gif')] bg-cover bg-center opacity-20 blur-[80px]"
     aria-hidden="true"
   ></div>
   <Header/>
   <Welcome/>
   <About/>
+  <Skills/>
   <MyProjects/>
   <Contact/>
   <SocialBar/>
@@ -22,8 +31,8 @@ function Home() {
   </>);
 }
 
-const link_twitter = 'https://twitter.com';
-const link_githup = 'https://github.com';
+const link_twitter = 'https://x.com/hichamallam02';
+const link_githup = 'https://github.com/hicham-allam';
 const link_linkedin = 'https://linkedin.com';
 const link_youtube = 'https://youtu.be/dQw4w9WgXcQ';
 
@@ -55,11 +64,11 @@ export function Header() {
       </div>
       <div id='menu' className={`menu ${menuState}`}>
         <svg onClick={()=>{setMenuState('max-sm:hidden')}} className='h-10 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
-        <a href="/clock" className='menu-a'>Clock</a>
+        <a href="/clock" className='menu-a' hidden>Clock</a>
         <a href="#about" className='menu-a'>About</a>
         <a href="#contact" className='menu-a' >Contact</a>
         <a href="/projects" className='menu-a'>Projects</a>
-        <a href="/blog" className='menu-a' >Blog</a>
+        <a href="/blog" className='menu-a' hidden>Blog</a>
       </div>
       <svg onClick={()=>{setMenuState('')}} className='h-10 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
   </div>);
@@ -74,14 +83,41 @@ const Welcome = () => {
       </div>
       <div className='w-2/5 max-w-[50%] px-4 cursor-pointer max-sm:w-[60%] max-sm:order-1'>
         <img 
-          className='w-full h-auto max-h-[550px] object-contain contrast-150 brightness-20 drop-shadow-[0_25px_25px_rgba(0,0,200,0.5)] hover:drop-shadow-[0_25px_25px_rgba(200,200,200,0.4)]
-          ease-in duration-500'
+          className='w-full h-auto max-h-[500px] object-contain contrast-150 brightness-20 drop-shadow-[0_25px_25px_rgba(0,0,200,0.5)] hover:drop-shadow-[0_25px_25px_rgba(200,200,200,0.4)]
+          ease-in duration-500 mt-4'
           src={Engineer} 
           alt="Hicham Allam - Developer" 
         />
       </div>
   </div>);
 
+}
+
+export function SocialBar() {
+  const { isBottom, isTop } = useScrollPosition();
+
+  return(<>{!isBottom && <div className="fixed left-6 bottom-6 flex items-center gap-7 bg-zinc-900 rounded-md border border-indigo-500 border-solid p-3 px-10
+    max-sm:left-0 max-sm:bottom-0 max-sm:w-full max-sm:rounded-none max-sm:border-x-0 max-sm:border-b-0 max-sm:justify-center max-sm:gap-4 max-sm:px-4" >
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_twitter} target='_black'>
+        <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill='#C84C32'><path d={svg_twitter}/></svg>
+      </a>
+      <div className="h-5 w-px bg-stone-500"></div>
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_githup} target='_black'>
+      <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill='#C84C32'><path d={svg_githup}/></svg>
+      </a>
+      <div className="h-5 w-[1.5px] bg-stone-500"></div>
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_linkedin} target='_black'>
+      <svg className='hover:fill-[#0072B1]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#C84C32'><path d={svg_linkedin}/></svg>
+      </a>
+      <div className="h-5 w-[1.5px] bg-stone-500"></div>
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_youtube} target='_black'>
+      <svg className='hover:fill-[#CD201F] ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='#C84C32'><path d={svg_youtube}/></svg>
+      </a>
+  </div>}</>);
 }
 
 export function Paragraph({ pid, title, children }) {
@@ -133,15 +169,131 @@ const About = () => {
           </a>
           , and I enjoy learning from different people and working on projects with developers from around the world.
         </p>
-
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7101404.567882156!2d-10.6223676!3d29.6477643!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b88619651c58d%3A0xd9d39381c42cffc3!2sMaroc!5e0!3m2!1sfr!2sma!4v1747037230919!5m2!1sfr!2sma" width="100%" height="400" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d850247.1982487019!2d-8.08456613432469!3d33.64995486382243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sfr!2sma!4v1747641946244!5m2!1sfr!2sma" width="100%" height="300" allowFullscreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
   </Paragraph>);
 }
+
+
+
+const Skills = () => {
+  const trackRef = useRef(null);
+  const animationId = useRef(null);
+  const position = useRef(0);
+  const isPaused = useRef(false);
+  const imageRefs = useRef([]);
+
+  // Use actual images instead of dummy placeholders
+  const baseSkills = [
+    { id: 1, image: html_svg, name: 'HTML' },
+    { id: 2, image: css_svg, name: 'CSS' },
+    { id: 3, image: javascript_svg, name: 'JavaScript' },
+    { id: 4, image: git_svg, name: 'Git'},
+    { id: 5, image: tailwind_svg, name: 'TailwindCss'},
+    { id: 6, image: wordpress_svg, name: 'WordPress'},
+    { id: 7, image: react_svg, name: 'React'},
+    // Add more skills if needed
+  ];
+
+  // Duplicate the skills for seamless loop
+  const duplicatedSkills = [...baseSkills, ...baseSkills, ...baseSkills];
+
+  useEffect(() => {
+    const speed = 1;
+    const itemWidth = 200 + 16;
+
+    const animate = () => {
+      if (!isPaused.current) {
+        position.current -= speed;
+
+        if (position.current <= -itemWidth * baseSkills.length) {
+          position.current += itemWidth * baseSkills.length;
+        }
+
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translateX(${position.current}px)`;
+        }
+      }
+      animationId.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationId.current);
+    };
+  }, [baseSkills.length]);
+
+  // Hover logic for each image
+  useEffect(() => {
+    imageRefs.current.forEach((ref) => {
+      if (!ref) return;
+
+      ref.addEventListener('mouseenter', () => {
+        isPaused.current = true;
+      });
+      ref.addEventListener('mouseleave', () => {
+        isPaused.current = false;
+      });
+      ref.addEventListener('touchstart', () => {
+        isPaused.current = true;
+      });
+      ref.addEventListener('touchend', () => {
+        isPaused.current = false;
+      });
+    });
+
+    return () => {
+      imageRefs.current.forEach((ref) => {
+        if (!ref) return;
+        ref.removeEventListener('mouseenter', () => {});
+        ref.removeEventListener('mouseleave', () => {});
+        ref.removeEventListener('touchstart', () => {});
+        ref.removeEventListener('touchend', () => {});
+      });
+    };
+  }, []);
+
+  return (<>
+    <Paragraph pid='skills' title='Skills'>
+      <p>
+      As a passionate developer, I have experience working with various programming languages and technologies, ranging from front-end design to back-end logic. Below are some of the tools and frameworks I use regularly in my projects.
+      </p>
+    </Paragraph>
+    <div className="mx-auto px-4">
+      <div className="relative overflow-hidden rounded-lg p-2 shadow-sm">
+        <div
+          ref={trackRef}
+          className="flex will-change-transform"
+          style={{ width: `${(200 + 16) * duplicatedSkills.length}px` }}
+        >
+          {duplicatedSkills.map((skill, index) => (
+            <div
+              key={`${skill.id}-${index}`}
+              ref={(el) => (imageRefs.current[index] = el)}
+              className="mx-2 rounded-lg overflow-hidden transition-all duration-300 hover:scale-110 hover:z-10 hover:shadow-lg flex items-center justify-center border-solid border-[1px] border-indigo-500 text-center text-white"
+              style={{ width: '150px', height: '150px', flexShrink: 0 }}
+            >
+              <div>
+                <img
+                  src={skill.image}
+                  alt={skill.name}
+                  className="w-24 h-24 object-contain pointer-events-none"
+                />
+                <span>{skill.name}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </>);
+};
+
 
 const MyProjects = () => {
   return(<Paragraph pid='my-projects' title='My Projects'>
   <div className="bg-zinc-900 p-10">
-    <h2 className="text-2xl text-white">My Projects</h2>
+    <h2 className="text-2xl text-white">My Projects (Under construction...)</h2>
     <div className='pt-20 flex justify-center'>
       <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50">Subscribe</button>
       <button className="bg-blue-500 shadow-lg shadow-blue-500/50">Subscribe</button>
@@ -194,33 +346,6 @@ const Contact = () => {
               </a> 
           </div>
       </Paragraph>);
-}
-
-export function SocialBar() {
-  const { isBottom, isTop } = useScrollPosition();
-
-  return(<>{!isBottom && <div className="fixed left-6 bottom-6 flex items-center gap-7 bg-zinc-900 rounded-md border border-[#C84C32] border-solid p-3 px-10
-    max-sm:left-0 max-sm:bottom-0 max-sm:w-full max-sm:rounded-none max-sm:border-x-0 max-sm:border-b-0 max-sm:justify-center max-sm:gap-4 max-sm:px-4" >
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_twitter} target='_black'>
-        <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill='#C84C32'><path d={svg_twitter}/></svg>
-      </a>
-      <div className="h-5 w-px bg-stone-500"></div>
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_githup} target='_black'>
-      <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill='#C84C32'><path d={svg_githup}/></svg>
-      </a>
-      <div className="h-5 w-[1.5px] bg-stone-500"></div>
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_linkedin} target='_black'>
-      <svg className='hover:fill-[#0072B1]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#C84C32'><path d={svg_linkedin}/></svg>
-      </a>
-      <div className="h-5 w-[1.5px] bg-stone-500"></div>
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_youtube} target='_black'>
-      <svg className='hover:fill-[#CD201F] ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='#C84C32'><path d={svg_youtube}/></svg>
-      </a>
-  </div>}</>);
 }
 
 const MyComponent = () => {

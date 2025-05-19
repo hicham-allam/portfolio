@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random User Profile Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .map-container {
+            height: 200px;
+            background-color: #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+        .map-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-indigo-700 mb-2">Random User Profiles</h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">Discover random user profiles from around the world. Click the button below to fetch a new profile!</p>
+        </header>
+
+        <div class="flex justify-center mb-8">
+            <button id="fetchBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 flex items-center">
+                <i class="fas fa-sync-alt mr-2"></i> Generate New Profile
+            </button>
+        </div>
+
+        <div id="loading" class="hidden text-center py-12">
+            <div class="loading-spinner inline-block text-indigo-600 text-4xl">
+                <i class="fas fa-spinner"></i>
+            </div>
+            <p class="mt-4 text-gray-600">Fetching user data...</p>
+        </div>
+
+        <div id="profileContainer" class="max-w-4xl mx-auto hidden">
+            <div class="profile-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="md:flex">
+                    <!-- Profile Image Section -->
+                    <div class="md:w-1/3 p-6 flex flex-col items-center">
+                        <img id="userImage" src="" alt="User" class="w-48 h-48 rounded-full object-cover border-4 border-indigo-100 mb-4">
+                        <h2 id="userName" class="text-2xl font-bold text-gray-800 text-center"></h2>
+                        <p id="userTitle" class="text-gray-600 text-center"></p>
+                        <div class="mt-4 flex space-x-4">
+                            <a id="emailLink" href="#" class="text-indigo-600 hover:text-indigo-800 text-xl">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a id="phoneLink" href="#" class="text-green-600 hover:text-green-800 text-xl">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                            <a id="cellLink" href="#" class="text-blue-600 hover:text-blue-800 text-xl">
+                                <i class="fas fa-mobile-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Profile Details Section -->
+                    <div class="md:w-2/3 p-6 border-t md:border-t-0 md:border-l border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Personal Info -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-user-circle mr-2 text-indigo-500"></i> Personal Information
+                                </h3>
+                                <ul class="space-y-2">
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Gender:</span>
+                                        <span id="userGender" class="text-gray-800"></span>
+                                    </li>
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Age:</span>
+                                        <span id="userAge" class="text-gray-800"></span>
+                                    </li>
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Birthday:</span>
+                                        <span id="userDob" class="text-gray-800"></span>
+                                    </li>
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Nationality:</span>
+                                        <span id="userNat" class="text-gray-800"></span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Address Info -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-2 text-indigo-500"></i> Address
+                                </h3>
+                                <address class="not-italic">
+                                    <p id="street" class="text-gray-800"></p>
+                                    <p id="cityState" class="text-gray-800"></p>
+                                    <p id="countryPostcode" class="text-gray-800"></p>
+                                </address>
+                                
+                                <!-- Simple Map Placeholder -->
+                                <div class="map-container mt-4 rounded-lg">
+                                    <div class="map-placeholder">
+                                        <i class="fas fa-map-marked-alt text-4xl mb-2"></i>
+                                        <p>Location: <span id="coordinates"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Login Info -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-key mr-2 text-indigo-500"></i> Login Information
+                                </h3>
+                                <ul class="space-y-2">
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Username:</span>
+                                        <span id="username" class="text-gray-800"></span>
+                                    </li>
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Password:</span>
+                                        <span id="password" class="text-gray-800"></span>
+                                    </li>
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Member since:</span>
+                                        <span id="registered" class="text-gray-800"></span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Timezone Info -->
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                                    <i class="fas fa-clock mr-2 text-indigo-500"></i> Timezone
+                                </h3>
+                                <ul class="space-y-2">
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Offset:</span>
+                                        <span id="timezoneOffset" class="text-gray-800"></span>
+                                    </li>
+                                    <li class="flex">
+                                        <span class="text-gray-600 font-medium w-24">Description:</span>
+                                        <span id="timezoneDesc" class="text-gray-800"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Info -->
+            <div class="mt-6 bg-indigo-50 p-4 rounded-lg text-center text-sm text-indigo-800">
+                <p>Data fetched from <a href="https://randomuser.me/" target="_blank" class="font-semibold hover:underline">Random User Generator API</a></p>
+                <p class="mt-1">Seed: <span id="apiSeed" class="font-mono"></span> | Version: <span id="apiVersion" class="font-mono"></span></p>
+            </div>
+        </div>
+
+        <div id="errorContainer" class="hidden max-w-2xl mx-auto bg-red-50 border-l-4 border-red-500 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-red-500 text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800">Error fetching user data</h3>
+                    <div class="mt-2 text-sm text-red-700">
+                        <p id="errorMessage">An unknown error occurred while fetching user data. Please try again.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fetchBtn = document.getElementById('fetchBtn');
+            const loading = document.getElementById('loading');
+            const profileContainer = document.getElementById('profileContainer');
+            const errorContainer = document.getElementById('errorContainer');
+            
+            // Format date function
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+            
+            // Format time function
+            function formatTime(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // Fetch user data
+            async function fetchUser() {
+                try {
+                    // Show loading, hide profile and error
+                    loading.classList.remove('hidden');
+                    profileContainer.classList.add('hidden');
+                    errorContainer.classList.add('hidden');
+                    
+                    // Fetch data from API
+                    const response = await fetch('https://randomuser.me/api/');
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    const user = data.results[0];
+                    
+                    // Update UI with user data
+                    document.getElementById('userImage').src = user.picture.large;
+                    document.getElementById('userName').textContent = `${user.name.first} ${user.name.last}`;
+                    document.getElementById('userTitle').textContent = user.name.title;
+                    document.getElementById('userGender').textContent = user.gender;
+                    document.getElementById('userAge').textContent = `${user.dob.age} years`;
+                    document.getElementById('userDob').textContent = `${formatDate(user.dob.date)} (${formatTime(user.dob.date)})`;
+                    document.getElementById('userNat').textContent = user.nat;
+                    
+                    // Contact info
+                    document.getElementById('emailLink').href = `mailto:${user.email}`;
+                    document.getElementById('phoneLink').href = `tel:${user.phone}`;
+                    document.getElementById('cellLink').href = `tel:${user.cell}`;
+                    
+                    // Address info
+                    document.getElementById('street').textContent = `${user.location.street.number} ${user.location.street.name}`;
+                    document.getElementById('cityState').textContent = `${user.location.city}, ${user.location.state}`;
+                    document.getElementById('countryPostcode').textContent = `${user.location.country}, ${user.location.postcode}`;
+                    document.getElementById('coordinates').textContent = `${user.location.coordinates.latitude}, ${user.location.coordinates.longitude}`;
+                    
+                    // Login info
+                    document.getElementById('username').textContent = user.login.username;
+                    document.getElementById('password').textContent = user.login.password;
+                    document.getElementById('registered').textContent = `${formatDate(user.registered.date)} (${user.registered.age} years ago)`;
+                    
+                    // Timezone info
+                    document.getElementById('timezoneOffset').textContent = user.location.timezone.offset;
+                    document.getElementById('timezoneDesc').textContent = user.location.timezone.description;
+                    
+                    // API info
+                    document.getElementById('apiSeed').textContent = data.info.seed;
+                    document.getElementById('apiVersion').textContent = data.info.version;
+                    
+                    // Hide loading, show profile
+                    loading.classList.add('hidden');
+                    profileContainer.classList.remove('hidden');
+                    
+                } catch (error) {
+                    console.error('Error fetching user:', error);
+                    loading.classList.add('hidden');
+                    document.getElementById('errorMessage').textContent = error.message;
+                    errorContainer.classList.remove('hidden');
+                }
+            }
+            
+            // Initial fetch
+            fetchUser();
+            
+            // Button click event
+            fetchBtn.addEventListener('click', fetchUser);
+        });
+    </script>
+</body>
+</html>
+
+//https://evilinsult.com/generate_insult.php?lang=en&type=json
+//https://api.genderize.io/?name=hanane
+//https://api.apis.guru/v2/list.json      #impotant long list
+//https://api.imgflip.com/get_memes
+

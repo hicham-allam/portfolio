@@ -4,7 +4,7 @@
 
 @layer components {
   .head-container {
-    @apply sticky top-0 flex px-2 text-white justify-between bg-black z-10;
+    @apply sticky top-0 flex px-2 text-white justify-between bg-zinc-900 shadow-md shadow-indigo-500/70 border-b border-indigo-500 z-10;
   }
   .menu {
     @apply flex gap-10 right-0 text-[20px] p-4
@@ -41,8 +41,10 @@
     duration-700
     hover:text-[#C84C32];
   }
-  .boduy {
+  .bodyy {
     background: black url('/src/assets/tenor.gif');
     @apply backdrop-blur-[10px];
   }
+
+
 }
