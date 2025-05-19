@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './clock.css';
+
 //import paraoxinigBeatz from '../assets/ParoxingBeatz - Logobi Type Beat.flac';
 import Logo from '../assets/hicham-allam-logo.png';
 import Engineer from '../assets/hicham-allam-dark.png';
@@ -11,6 +11,7 @@ import git_svg from '../assets/git.svg';
 import tailwind_svg from '../assets/tailwind.svg';
 import wordpress_svg from '../assets/wordpress.svg';
 import react_svg from '../assets/react.svg';
+import mysql_svg from '../assets/mysql.svg';
 
 export default Home;
 
@@ -24,7 +25,7 @@ function Home() {
   <Welcome/>
   <About/>
   <Skills/>
-  <MyProjects/>
+    <MyProjects/>
   <Contact/>
   <SocialBar/>
   <div className="h-5 bg-gradient-to-b from-black to-transparent"></div>
@@ -55,7 +56,7 @@ export function Header() {
   return(<div className="head-container">
       <div className="flex">
         <a href="https://hichamallam.com">
-          <img className="block object-contain h-14 max-sm:h-12" src={Logo} alt="logo"/>
+        <img className="block object-contain h-14 max-sm:h-12 max-w-full" src={Logo} alt="logo"/>
         </a>
         <div>
           <span className='block text-[22px] max-sm:text-[16px] font-bold px-5 font-sans text-[#C84C32]'>Hicham Allam</span>
@@ -63,14 +64,14 @@ export function Header() {
         </div>
       </div>
       <div id='menu' className={`menu ${menuState}`}>
-        <svg onClick={()=>{setMenuState('max-sm:hidden')}} className='h-10 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+        <svg onClick={()=>{setMenuState('max-sm:hidden')}} className='h-8 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
         <a href="/clock" className='menu-a' hidden>Clock</a>
         <a href="#about" className='menu-a'>About</a>
         <a href="#contact" className='menu-a' >Contact</a>
         <a href="/projects" className='menu-a'>Projects</a>
         <a href="/blog" className='menu-a' hidden>Blog</a>
       </div>
-      <svg onClick={()=>{setMenuState('')}} className='h-10 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
+      <svg onClick={()=>{setMenuState('')}} className='h-10 pt-2 pr-4 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
   </div>);
 }
 
@@ -129,7 +130,7 @@ export function Paragraph({ pid, title, children }) {
           <div className='text-white text-[32px]'>{title}</div>
         </div>
       </div>
-      <div className='flex-[1] px-[120px] flex flex-col gap-5 max-sm:px-10 max-sm:text-[16px] '>
+      <div className='flex-[1] px-[90px] flex flex-col gap-5 max-sm:px-10 max-sm:text-[16px] '>
           {children}
       </div>
     </div>
@@ -169,10 +170,9 @@ const About = () => {
           </a>
           , and I enjoy learning from different people and working on projects with developers from around the world.
         </p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d850247.1982487019!2d-8.08456613432469!3d33.64995486382243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sfr!2sma!4v1747641946244!5m2!1sfr!2sma" width="100%" height="300" allowFullscreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d850247.1982487019!2d-8.08456613432469!3d33.64995486382243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sfr!2sma!4v1747641946244!5m2!1sfr!2sma" width="100%" height="250" loading="lazy"></iframe>
   </Paragraph>);
 }
-
 
 
 const Skills = () => {
@@ -182,24 +182,22 @@ const Skills = () => {
   const isPaused = useRef(false);
   const imageRefs = useRef([]);
 
-  // Use actual images instead of dummy placeholders
   const baseSkills = [
     { id: 1, image: html_svg, name: 'HTML' },
     { id: 2, image: css_svg, name: 'CSS' },
     { id: 3, image: javascript_svg, name: 'JavaScript' },
-    { id: 4, image: git_svg, name: 'Git'},
-    { id: 5, image: tailwind_svg, name: 'TailwindCss'},
-    { id: 6, image: wordpress_svg, name: 'WordPress'},
-    { id: 7, image: react_svg, name: 'React'},
-    // Add more skills if needed
+    { id: 4, image: git_svg, name: 'Git' },
+    { id: 5, image: tailwind_svg, name: 'TailwindCss' },
+    { id: 6, image: wordpress_svg, name: 'WordPress' },
+    { id: 7, image: react_svg, name: 'React' },
+    { id: 8, image: mysql_svg, name: 'MySql' },
   ];
 
-  // Duplicate the skills for seamless loop
   const duplicatedSkills = [...baseSkills, ...baseSkills, ...baseSkills];
 
   useEffect(() => {
     const speed = 1;
-    const itemWidth = 200 + 16;
+    const itemWidth = 90 + 16;
 
     const animate = () => {
       if (!isPaused.current) {
@@ -223,28 +221,23 @@ const Skills = () => {
     };
   }, [baseSkills.length]);
 
-  // Hover logic for each image
   useEffect(() => {
     imageRefs.current.forEach((ref) => {
       if (!ref) return;
 
-      ref.addEventListener('mouseenter', () => {
-        isPaused.current = true;
-      });
-      ref.addEventListener('mouseleave', () => {
-        isPaused.current = false;
-      });
-      ref.addEventListener('touchstart', () => {
-        isPaused.current = true;
-      });
-      ref.addEventListener('touchend', () => {
-        isPaused.current = false;
-      });
+      const pause = () => { isPaused.current = true; };
+      const resume = () => { isPaused.current = false; };
+
+      ref.addEventListener('mouseenter', pause);
+      ref.addEventListener('mouseleave', resume);
+      ref.addEventListener('touchstart', pause);
+      ref.addEventListener('touchend', resume);
     });
 
     return () => {
       imageRefs.current.forEach((ref) => {
         if (!ref) return;
+
         ref.removeEventListener('mouseenter', () => {});
         ref.removeEventListener('mouseleave', () => {});
         ref.removeEventListener('touchstart', () => {});
@@ -253,40 +246,41 @@ const Skills = () => {
     };
   }, []);
 
-  return (<>
-    <Paragraph pid='skills' title='Skills'>
-      <p>
-      As a passionate developer, I have experience working with various programming languages and technologies, ranging from front-end design to back-end logic. Below are some of the tools and frameworks I use regularly in my projects.
-      </p>
-    </Paragraph>
-    <div className="mx-auto px-4">
-      <div className="relative overflow-hidden rounded-lg p-2 shadow-sm">
-        <div
-          ref={trackRef}
-          className="flex will-change-transform"
-          style={{ width: `${(200 + 16) * duplicatedSkills.length}px` }}
-        >
-          {duplicatedSkills.map((skill, index) => (
-            <div
-              key={`${skill.id}-${index}`}
-              ref={(el) => (imageRefs.current[index] = el)}
-              className="mx-2 rounded-lg overflow-hidden transition-all duration-300 hover:scale-110 hover:z-10 hover:shadow-lg flex items-center justify-center border-solid border-[1px] border-indigo-500 text-center text-white"
-              style={{ width: '150px', height: '150px', flexShrink: 0 }}
-            >
-              <div>
-                <img
-                  src={skill.image}
-                  alt={skill.name}
-                  className="w-24 h-24 object-contain pointer-events-none"
-                />
-                <span>{skill.name}</span>
+  return (
+    <>
+      <Paragraph pid="skills" title="Skills">
+        <p>
+          As a passionate developer, I have experience working with various programming languages and technologies, ranging from front-end design to back-end logic. Below are some of the tools and frameworks I use regularly in my projects.
+        </p>
+      </Paragraph>
+      <div className="mx-auto px-4">
+        <div className="overflow-hidden rounded-lg p-2 shadow-sm h-fit md:h-[180px]">
+          <div
+            ref={trackRef}
+            className="flex will-change-transform"
+            style={{ width: `${(90 + 16) * duplicatedSkills.length}px` }}
+          >
+            {duplicatedSkills.map((skill, index) => (
+              <div
+                key={`${skill.id}-${index}`}
+                ref={(el) => (imageRefs.current[index] = el)}
+                className="mx-2 rounded-lg overflow-hidden transition-all duration-300 hover:scale-110 hover:z-10 hover:shadow-lg flex items-center justify-center border border-indigo-500 text-center text-white w-[80px] h-[120px] sm:w-[90px] sm:h-[130px] md:w-[190px] md:h-[150px] flex-shrink-0"
+              >
+                <div>
+                  <img
+                    src={skill.image}
+                    alt={skill.name}
+                    className="w-12 p-2 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain pointer-events-none"
+                  />
+                  <span className="text-xs sm:text-sm">{skill.name}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </>);
+    </>
+  );
 };
 
 

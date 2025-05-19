@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css'; //tilwindcss
 
-import Clock from './pages/Clock';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Projects from './pages/Projects';
@@ -17,7 +16,6 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/clock" element={<Clock />} />
         <Route path="/login" element={<Login />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/projects" element={<Projects />} />

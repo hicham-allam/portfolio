@@ -4,7 +4,7 @@
 
 @layer components {
   .head-container {
-    @apply sticky top-0 flex px-2 text-white justify-between bg-zinc-900 shadow-md shadow-indigo-500/70 border-b border-indigo-500 z-10;
+    @apply sticky top-0 flex px-2 justify-between bg-black shadow-md shadow-[#C84C30]/60 border-b  border-[#C84C30] text-indigo-400  z-10;
   }
   .menu {
     @apply flex gap-10 right-0 text-[20px] p-4
@@ -12,10 +12,12 @@
     max-sm:text-[14px]
     max-sm:bg-zinc-900
     max-sm:border-solid
-    max-sm:border-[#C84C32]
+    max-sm:border-[#C84C30]
     max-sm:border
     max-sm:fixed
-    max-sm:top-2;
+    max-sm:top-0
+    max-sm:p-2
+    max-sm:text-center;
   }
   .menu-a {
     @apply hover:text-[#C84C32] hover:underline;
@@ -42,7 +44,6 @@
     hover:text-[#C84C32];
   }
   .bodyy {
-    background: black url('/src/assets/tenor.gif');
     @apply backdrop-blur-[10px];
   }
 
