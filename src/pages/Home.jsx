@@ -17,10 +17,6 @@ export default Home;
 
 function Home() {
   return (<>
-  <div 
-    className="fixed inset-0 -z-50 bg-[url('/src/assets/tenor.gif')] bg-cover bg-center opacity-20 blur-[80px]"
-    aria-hidden="true"
-  ></div>
   <Header/>
   <Welcome/>
   <About/>
@@ -34,7 +30,7 @@ function Home() {
 
 const link_twitter = 'https://x.com/hichamallam02';
 const link_githup = 'https://github.com/hicham-allam';
-const link_linkedin = 'https://linkedin.com';
+const link_linkedin = 'https://www.linkedin.com/in/hicham-allam-ing';
 const link_youtube = 'https://youtu.be/dQw4w9WgXcQ';
 
 const svg_twitter = 'M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z';
@@ -326,7 +322,7 @@ const Contact = () => {
               <div>github</div>
               </a>
               <a className='contact-a'
-                href={link_twitter} target='_black'>
+                href={link_linkedin} target='_black'>
                 <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path d={svg_linkedin}/>
                 </svg>

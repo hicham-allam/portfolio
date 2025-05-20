@@ -2,9 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  body {
+    @apply text-[#C84C30];
+    background-image: linear-gradient(-225deg, #0d0d0d 0%, #1a1a1a 30%, #44107A 60%, #C84C30 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
 @layer components {
   .head-container {
-    @apply sticky top-0 flex px-2 justify-between bg-black shadow-md shadow-[#C84C30]/60 border-b  border-[#C84C30] text-indigo-400  z-10;
+    @apply sticky top-0 flex px-2 justify-between bg-zinc-900 shadow-md shadow-[#C84C30]/60 border-b  border-[#C84C30] text-indigo-400  z-10;
+    background-image: linear-gradient(140deg, #0d0d0d 0%, #1a1a1a 30%, #44107A 60%, rgba(0, 0, 0, 0.822) 30%);
   }
   .menu {
     @apply flex gap-10 right-0 text-[20px] p-4
@@ -43,9 +56,5 @@
     duration-700
     hover:text-[#C84C32];
   }
-  .bodyy {
-    @apply backdrop-blur-[10px];
-  }
-
-
+  
 }
