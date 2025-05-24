@@ -21,10 +21,12 @@ function Home() {
   <Welcome/>
   <About/>
   <Skills/>
-    <MyProjects/>
+  <MyProjects/>
   <Contact/>
   <SocialBar/>
-  <div className="h-5 bg-gradient-to-b from-black to-transparent"></div>
+  <div className="text-[12px] max-sm:text-[10px] text-white text-center bg-black mt-20 bg-gradient-to-b from-black to-transparent">
+    © 2025 hichamallam.com &middot; All rights reserved &middot; Crafted with ❤ by Hicham
+  </div>
   </>);
 }
 
@@ -64,7 +66,7 @@ export function Header() {
         <a href="/clock" className='menu-a' hidden>Clock</a>
         <a href="#about" className='menu-a'>About</a>
         <a href="#contact" className='menu-a' >Contact</a>
-        <a href="/projects" className='menu-a'>Projects</a>
+        <a href="/projects" className='menu-a' hidden>Projects</a>
         <a href="/blog" className='menu-a' hidden>Blog</a>
       </div>
       <svg onClick={()=>{setMenuState('')}} className='h-10 pt-2 pr-4 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
@@ -277,11 +279,12 @@ const Skills = () => {
       </div>
     </>
   );
-};
+}
 
 
 const MyProjects = () => {
-  return(<Paragraph pid='my-projects' title='My Projects'>
+  return(<div hidden>
+  <Paragraph pid='my-projects' title='My Projects'>
   <div className="bg-zinc-900 p-10">
     <h2 className="text-2xl text-white">My Projects (Under construction...)</h2>
     <div className='pt-20 flex justify-center'>
@@ -290,53 +293,130 @@ const MyProjects = () => {
       <button className="bg-indigo-500 shadow-lg shadow-indigo-500/50">Subscribe</button>
     </div>
   </div>
-  </Paragraph>);
+  </Paragraph>
+  </div>);
 }
 
 const Contact = () => {
+  const API_PATH_SUBMIT = "https://d1-prod.hichamallam.workers.dev/submit";
+  const formRef = useRef(null);
+  const [messageInfo, setMessageInfo] = useState({ type: '', text: '', visible: false });
 
-  return (<Paragraph pid="contact" title="Contact Me">
-          <p className='lg:mt-10'>
-            If you’d like to get in touch, feel free to write me at:
-            <a className='contact-email' href="mailto:hichamallam02@gmail.com">
-              hichamallam02@gmail.com
-            </a>
-          </p>
-          <p>
-            You can also find me on various socials,<br/>
-            feel free to get it touch there too!
-          </p>
-          <div className="flex flex-wrap text-indigo-500 underline">
-              <a className='contact-a'
-                href={link_twitter}  target='_black'>
-                <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path d={svg_twitter}/>
-                </svg>
-                <div>twitter</div>
-              </a>
-              <a className='contact-a'
-                href={link_githup} target='_black'>
-              <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" >
-                <path d={svg_githup}/>
-              </svg>
-              <div>github</div>
-              </a>
-              <a className='contact-a'
-                href={link_linkedin} target='_black'>
-                <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <path d={svg_linkedin}/>
-                </svg>
-                <div>linkedin</div>
-              </a>
-              <a className='contact-a' href={link_twitter} target='_black'>
-                <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                  <path d={svg_youtube}/>
-                </svg>
-                <div>youtube</div>
-              </a> 
+  const showMessage = (type, text) => {
+    setMessageInfo({ type, text, visible: true });
+    setTimeout(() => {
+      setMessageInfo({ ...messageInfo, visible: false });
+    }, 8000);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = formRef.current;
+    const data = {
+      full_name: form.full_name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim()
+    };
+
+    try {
+      const res = await fetch(API_PATH_SUBMIT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Submission failed');
+      }
+
+      showMessage('success', 'Message submitted successfully!');
+      form.reset();
+    } catch (err) {
+      showMessage('error', err.message);
+    }
+  };
+
+  return (<>
+    <Paragraph pid="contact" title="Contact Me">
+      <p className='lg:mt-10'>
+        If you have any questions, ideas, feel free to reach out. <br />
+        You can email us directly at:
+        <a className='contact-email inline' href="mailto:hichamallam02@gmail.com">
+          hichamallam02@gmail.com
+        </a><br />
+        Or simply leave us a message below.
+      </p>
+    </Paragraph>
+
+    <div className="flex items-center justify-center px-4 py-10 mt-0">
+      <div className="w-full max-w-xl bg-[linear-gradient(140deg,#0d0d0d_0%,#1a1a1a_30%,#44107A_60%,oklch(21%_0.006_285.885)_90%)] p-8 rounded-xl shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-6">Contact Portal</h1>
+        <div id="contact-message" className={`${messageInfo.visible
+          ? `mb-4 p-4 rounded text-sm ${messageInfo.type === 'success'
+            ? 'bg-green-100 text-green-800 border border-green-300'
+            : 'bg-red-100 text-red-800 border border-red-300'}`
+          : 'hidden'}`}>{messageInfo.text}</div>
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 text-black">
+          <div>
+            <label htmlFor="full_name" className="block text-sm font-medium mb-1">Full Name</label>
+            <input type="text" id="full_name" name="full_name" placeholder='Full Name' required
+              className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C84C30]" />
           </div>
-      </Paragraph>);
-}
+
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+            <input type="email" id="email" name="email" placeholder='Email' required
+              className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C84C30]" />
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder='Message' required
+              className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C84C30]" />
+          </div>
+
+          <button type="submit"
+            className="w-full text-black py-2 rounded-lg font-semibold bg-white/50 hover:bg-[#C84C30] hover:text-white transition duration-300">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <p className='text-white text-center my-10'>
+      You can also find me on various socials,
+      feel free to get it touch there too!
+    </p>
+
+    <div className="flex flex-row max-sm:flex-col gap-1 text-indigo-500 underline">
+      <a className='contact-a' href={link_twitter} target='_blank'>
+        <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path d={svg_twitter} />
+        </svg>
+        <div>twitter</div>
+      </a>
+      <a className='contact-a' href={link_githup} target='_blank'>
+        <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+          <path d={svg_githup} />
+        </svg>
+        <div>github</div>
+      </a>
+      <a className='contact-a' href={link_linkedin} target='_blank'>
+        <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path d={svg_linkedin} />
+        </svg>
+        <div>linkedin</div>
+      </a>
+      <a className='contact-a' href={link_youtube} target='_blank'>
+        <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path d={svg_youtube} />
+        </svg>
+        <div>youtube</div>
+      </a>
+    </div>
+  </>);
+};
 
 const MyComponent = () => {
   const { isBottom, isTop } = useScrollPosition();

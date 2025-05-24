@@ -16,8 +16,11 @@
 
 @layer components {
   .head-container {
-    @apply sticky top-0 flex px-2 justify-between bg-zinc-900 shadow-md shadow-[#C84C30]/60 border-b  border-[#C84C30] text-indigo-400  z-10;
-    background-image: linear-gradient(140deg, #0d0d0d 0%, #1a1a1a 30%, #44107A 60%, rgba(0, 0, 0, 0.822) 30%);
+    @apply sticky top-0 z-10 flex justify-between px-2 
+    bg-[linear-gradient(140deg,#0d0d0d_0%,#1a1a1a_30%,#44107A_60%,oklch(21%_0.006_285.885)_90%)]
+    /*border-b border-[#C84C30]*/ text-white
+    shadow-md shadow-red-800/30;
+    /*background-image: linear-gradient(140deg, #0d0d0d 0%, #1a1a1a 30%, #44107A 60%, oklch(21% 0.006 285.885) 30%);*/
   }
   .menu {
     @apply flex gap-10 right-0 text-[20px] p-4
@@ -41,7 +44,8 @@
     duration-300
     hover:text-[#C84C32]
     hover:scale-105
-    hover:shadow-[#C84C32]/50;
+    hover:shadow-[#C84C32]/50
+    max-sm:p-2
   }
   .contact-email {
     @apply text-indigo-500 shadow-lg underline shadow-indigo-500/50 mx-5
