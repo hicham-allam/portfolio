@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import './clock.css';
 import {Header} from './Home';
 //import paraoxinigBeatz from '../assets/ParoxingBeatz - Logobi Type Beat.flac';
-import Logo from '../assets/hicham-allam-logo.png';
-import Engineer from '../assets/hicham-allam-dark.png';
+//import Logo from '../assets/hicham-allam-logo.png';
+//import Engineer from '../assets/hicham-allam-dark.png';
 
 export default Blog;
 

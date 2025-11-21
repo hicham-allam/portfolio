@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 async function post(path, data) {
 
-  const BASE_API = "https://d1-prod.hichamallam.workers.dev";
+  const BASE_API = `https://web_api.hichamallam.com${path}`;
   try {
-    const res = await fetch(BASE_API + path, {
+    const res = await fetch(BASE_API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -72,6 +72,17 @@ function Dashboard() {
     }
   };
 
+  const cheekNewMsg = (id) => {
+    if (!localStorage.msg_id) {
+      sessionStorage.setItem('msg_id',id)
+      localStorage.setItem('msg_id',1);
+      return 'bg-green-200'
+    }
+    
+    return ''     
+    
+  };
+
 return (
   <div className="text-black/70 bg-gray-100 min-h-screen flex items-center justify-center p-4">
     <div className="w-full max-w-4xl bg-white p-4 sm:p-6 rounded-xl shadow-lg">
@@ -124,8 +135,11 @@ return (
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
-                    {messages.map((msg) => (
-                      <tr key={msg.id} onClick={() => setSelectedMessage(msg)} className="hover:bg-gray-100 cursor-pointer">
+                    {messages.map((msg) => ( 
+                      <tr key={msg.id}
+                        onClick={() => setSelectedMessage(msg)}
+                        className={`hover:bg-gray-100 cursor-pointer`}
+                        >
                         <td className="p-3 border-b border-gray-300">{msg.full_name}</td>
                         <td className="p-3 border-b border-gray-300">
                           <a href={`mailto:${msg.email}`} className="text-blue-600 hover:underline">{msg.email}</a>
@@ -142,7 +156,7 @@ return (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
                   <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-200 text-sm">
                     <div className="flex justify-between items-center border-b pb-4 mb-4">
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-800">Message Details</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold text-blue-600">Message Details</h3>
                       <button
                         onClick={() => setSelectedMessage(null)}
                         className="text-gray-400 hover:text-gray-600 transition-colors duration-200 text-xl font-semibold"
@@ -151,23 +165,27 @@ return (
                         &times;
                       </button>
                     </div>
-                    <div className="space-y-4 text-gray-700">
+                    <div className="space-y-4 ">
                       <div className="flex flex-col sm:flex-row sm:gap-4">
                         <div>
                           <span className="font-semibold text-gray-600">ID:</span> {selectedMessage.id}
                         </div>
                         <div>
-                          <span className="font-semibold text-gray-600">Name:</span> {selectedMessage.full_name}
+                          <span className="font-semibold text-gray-600">Date:</span> {formatDate(selectedMessage.timestamp)}
                         </div>
                       </div>
                       <div>
-                        <span className="font-semibold text-gray-600">Email:</span> {selectedMessage.email}
+                        <span className="font-semibold text-gray-600">Email:</span> &nbsp;
+                        <span
+                          className='cursor-pointer'
+                          onDoubleClick={(e)=>{navigator.clipboard.writeText(e.target.textContent)}}>
+                          {selectedMessage.email}
+                        </span>
                       </div>
                       <div>
-                        <span className="font-semibold text-gray-600">Date:</span> {formatDate(selectedMessage.timestamp)}
+                        <span className="font-semibold text-gray-600">Name:</span> {selectedMessage.full_name}
                       </div>
                       <div>
-                        <span className="font-semibold text-gray-600">Message:</span>
                         <p className="whitespace-pre-wrap mt-2 border p-3 rounded-md bg-gray-50 text-gray-800 break-words">
                           {selectedMessage.message}
                         </p>

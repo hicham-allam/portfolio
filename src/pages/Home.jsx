@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Logo from '../assets/hicham-allam-logo.png';
 import Engineer from '../assets/hicham-allam-dark.png';
 
+//svg icons
 import html_svg from '../assets/html.svg';
 import css_svg from '../assets/css.svg';
 import javascript_svg from '../assets/javascript.svg';
@@ -13,22 +14,6 @@ import wordpress_svg from '../assets/wordpress.svg';
 import react_svg from '../assets/react.svg';
 import mysql_svg from '../assets/mysql.svg';
 
-export default Home;
-
-function Home() {
-  return (<>
-  <Header/>
-  <Welcome/>
-  <About/>
-  <Skills/>
-  <MyProjects/>
-  <Contact/>
-  <SocialBar/>
-  <div className="text-[12px] max-sm:text-[10px] text-white text-center bg-black mt-20 bg-gradient-to-b from-black to-transparent">
-    © 2025 hichamallam.com &middot; All rights reserved &middot; Crafted with ❤ by Hicham
-  </div>
-  </>);
-}
 
 const link_twitter = 'https://x.com/hichamallam02';
 const link_githup = 'https://github.com/hicham-allam';
@@ -49,29 +34,56 @@ function mouseOut(e) {
   e.target.style.color = 'white';
 }
 
-export function Header() {
+
+
+
+const Header = () => {
   const [menuState, setMenuState] =  useState('max-sm:hidden');
-  return(<div className="head-container">
+  /*
+  const [s, setS] = useState(0);
+  const [v, setV] = useState('');
+
+  useEffect(()=>{
+    window.addEventListener('scroll', () => {
+      setS(lastScroll => {
+        const currentScroll = window.pageYOffset;     
+        if (currentScroll > lastScroll) {
+          // Scrolling Down
+          setV('');
+          console.log('Scrolling Down');
+        } else {
+          // Scrolling Up
+          setV('sticky sticky top-0');
+          console.log('Scrolling Up');
+        }
+        return currentScroll;
+      });  
+    });
+  },[])*/
+
+  return(<div className={`head-container `} >
       <div className="flex">
-        <a href="https://hichamallam.com">
+        <a href="/">
         <img className="block object-contain h-14 max-sm:h-12 max-w-full" src={Logo} alt="logo"/>
         </a>
         <div>
           <span className='block text-[22px] max-sm:text-[16px] font-bold px-5 font-sans text-[#C84C32]'>Hicham Allam</span>
-          <span className='block text-[14px] max-sm:text-[10px] font-bold px-5 font-sans'>A Full-Stack Developer Journey</span>
+          <span className='block text-[14px] max-sm:text-[10px] font-bold px-5 font-sans'>
+            Mechatronics Engineering & Web Developer</span>
         </div>
       </div>
-      <div id='menu' className={`menu ${menuState}`}>
-        <svg onClick={()=>{setMenuState('max-sm:hidden')}} className='h-8 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+      <div id='menu' className={`menu ${menuState}`} onClick={()=>{setMenuState('max-sm:hidden')}}>
+        <svg className='h-8 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
         <a href="/clock" className='menu-a' hidden>Clock</a>
         <a href="#about" className='menu-a'>About</a>
-        <a href="#contact" className='menu-a' >Contact</a>
-        <a href="/projects" className='menu-a' hidden>Projects</a>
-        <a href="/blog" className='menu-a' hidden>Blog</a>
+        <a href="#contact" className='menu-a'>Contact</a>
+        <a href="/projects" className='menu-a'>Projects</a>
+        <a href="/blog" className='menu-a' >Blog</a>
       </div>
       <svg onClick={()=>{setMenuState('')}} className='h-10 pt-2 pr-4 fill-[#C84C32] hidden max-sm:block' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
   </div>);
 }
+
 
 const Welcome = () => {
   return (<div className='text-white flex flex-row items-center max-sm:flex-col max-sm:gap-10 max-sm:justify-between'>
@@ -92,84 +104,22 @@ const Welcome = () => {
 
 }
 
-export function SocialBar() {
-  const { isBottom, isTop } = useScrollPosition();
 
-  return(<>{!isBottom && <div className="fixed left-6 bottom-6 flex items-center gap-7 bg-zinc-900 rounded-md border border-indigo-500 border-solid p-3 px-10
-    max-sm:left-0 max-sm:bottom-0 max-sm:w-full max-sm:rounded-none max-sm:border-x-0 max-sm:border-b-0 max-sm:justify-center max-sm:gap-4 max-sm:px-4" >
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_twitter} target='_black'>
-        <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill='#C84C32'><path d={svg_twitter}/></svg>
-      </a>
-      <div className="h-5 w-px bg-stone-500"></div>
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_githup} target='_black'>
-      <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill='#C84C32'><path d={svg_githup}/></svg>
-      </a>
-      <div className="h-5 w-[1.5px] bg-stone-500"></div>
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_linkedin} target='_black'>
-      <svg className='hover:fill-[#0072B1]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#C84C32'><path d={svg_linkedin}/></svg>
-      </a>
-      <div className="h-5 w-[1.5px] bg-stone-500"></div>
-      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
-        href={link_youtube} target='_black'>
-      <svg className='hover:fill-[#CD201F] ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='#C84C32'><path d={svg_youtube}/></svg>
-      </a>
-  </div>}</>);
-}
-
-export function Paragraph({ pid, title, children }) {
-  return (<>
-    <div id={pid} className='flex pt-40 text-white max-sm:flex-col max-sm:py-10'>
-      <div className='flex-[1] text-[#C84C32]'>
-        <div className='flex justify-end items-center gap-4 p-10 max-sm:justify-center'>
-          <img className='h-10' src={Logo} alt="hicham allam logo" />
-          <div className='text-white text-[32px]'>{title}</div>
-        </div>
-      </div>
-      <div className='flex-[1] px-[90px] flex flex-col gap-5 max-sm:px-10 max-sm:text-[16px] '>
-          {children}
-      </div>
+const MyProjects = () => {
+  return(<div hidden>
+  <Paragraph pid='my-projects' title='My Projects'>
+    <div className='text-center'>
     </div>
-  </>);
-}
-
-const About = () => {
-
-  return (<Paragraph pid="about" title="About Me">
-        <p>
-          I'm Hicham Allam, an aspiring Full-Stack Developer focused on learning and building modern web applications. I’m developing my skills in both frontend and backend technologies.
-        </p>
-        <p>
-          I enjoy turning ideas into websites that are clear, functional, and user-friendly. I'm always exploring new ways to improve how things work and look online.
-        </p>
-        <p className="hidden">
-          I'm currently working on <span className="p-style">Your Project Name</span>, a project about <span className="p-style">your topic</span>. I also created <span className="p-style">Another Project</span>, a <span className="p-style">simple tool or website</span> that helps <span className="p-style">specific users</span> with <span className="p-style">a useful task</span>.
-        </p>
-        <p className="hidden">
-          Outside of coding, I share what I learn on [your blog/YouTube/Twitter]. I enjoy writing about topics like [e.g. "JavaScript tips" or "project challenges"].
-        </p>
-        <p>
-          I'm also interested in reading. Lately, I’ve been reading 
-          <a href="https://a.co/d/1E6bKRB" target='_blank'>
-            <span className='p-style'> High Performance Browser Networking</span>
-          </a>
-          , and my previous book 
-          <a href="https://a.co/d/hO8Ud9e" target='_blank'>
-            <span className='p-style'> The Staff Engineer's Path </span>
-          </a>
-          , which taught me a lot about expanding impact beyond code—through influence, communication, cross-team collaboration, and owning invisible but critical 'glue work' that keeps engineering organizations thriving.
-        </p>
-        <p>
-          I’m based in  
-          <a href="https://maps.app.goo.gl/FHrgtbMBSH2CLQAe6">
-            <span className='p-style'> Casablanca, Morocco</span>
-          </a>
-          , and I enjoy learning from different people and working on projects with developers from around the world.
-        </p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d850247.1982487019!2d-8.08456613432469!3d33.64995486382243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sfr!2sma!4v1747641946244!5m2!1sfr!2sma" width="100%" height="250" loading="lazy"></iframe>
-  </Paragraph>);
+    <div className="bg-zinc-900 p-2">
+      <h2 className="font-600 mt-[40px]">Blog Coming Soon</h2>
+      <h2 className="text-2xl text-white">(Under construction...)</h2>
+    </div>
+  </Paragraph>
+  </div>);
+    /*
+        <video controls width={"250"} src="http://localhost:1212/?path=C:/Users/HICHAM/Documents/PycharmProjects/SERVER/files/8.mp4">
+    </video>
+     */
 }
 
 
@@ -194,7 +144,7 @@ const Skills = () => {
   const duplicatedSkills = [...baseSkills, ...baseSkills, ...baseSkills];
 
   useEffect(() => {
-    const speed = 1;
+    const speed = 2;
     const itemWidth = 90 + 16;
 
     const animate = () => {
@@ -203,6 +153,7 @@ const Skills = () => {
 
         if (position.current <= -itemWidth * baseSkills.length) {
           position.current += itemWidth * baseSkills.length;
+          //position.current += speed;
         }
 
         if (trackRef.current) {
@@ -251,7 +202,7 @@ const Skills = () => {
           As a passionate developer, I have experience working with various programming languages and technologies, ranging from front-end design to back-end logic. Below are some of the tools and frameworks I use regularly in my projects.
         </p>
       </Paragraph>
-      <div className="mx-auto px-4">
+      <div className="mx-auto px-4 pt-4">
         <div className="overflow-hidden rounded-lg p-2 shadow-sm h-fit md:h-[180px]">
           <div
             ref={trackRef}
@@ -282,23 +233,51 @@ const Skills = () => {
 }
 
 
-const MyProjects = () => {
-  return(<div hidden>
-  <Paragraph pid='my-projects' title='My Projects'>
-  <div className="bg-zinc-900 p-10">
-    <h2 className="text-2xl text-white">My Projects (Under construction...)</h2>
-    <div className='pt-20 flex justify-center'>
-      <button className="bg-cyan-500 shadow-lg shadow-cyan-500/50">Subscribe</button>
-      <button className="bg-blue-500 shadow-lg shadow-blue-500/50">Subscribe</button>
-      <button className="bg-indigo-500 shadow-lg shadow-indigo-500/50">Subscribe</button>
-    </div>
-  </div>
-  </Paragraph>
-  </div>);
+const About = () => {
+
+  return (<Paragraph pid="about" title="About Me">
+        <p>
+          I'm Hicham Allam, an aspiring Full-Stack Developer focused on learning and building modern web applications. I’m developing my skills in both frontend and backend technologies.
+        </p>
+        <p>
+          I enjoy turning ideas into websites that are clear, functional, and user-friendly. I'm always exploring new ways to improve how things work and look online.
+        </p>
+        <p className="hidden">
+          I'm currently working on <span className="p-style">Your Project Name</span>, a project about <span className="p-style">your topic</span>. I also created <span className="p-style">Another Project</span>, a <span className="p-style">simple tool or website</span> that helps <span className="p-style">specific users</span> with <span className="p-style">a useful task</span>.
+        </p>
+        <p className="hidden">
+          Outside of coding, I share what I learn on [your blog/YouTube/Twitter]. I enjoy writing about topics like [e.g. "JavaScript tips" or "project challenges"].
+        </p>
+        <p>
+          I'm also interested in reading. Lately, I’ve been reading 
+          <a href="https://a.co/d/1E6bKRB" target='_blank'>
+            <span className='p-style'> High Performance Browser Networking</span>
+          </a>
+          , and my previous book 
+          <a href="https://a.co/d/hO8Ud9e" target='_blank'>
+            <span className='p-style'> The Staff Engineer's Path </span>
+          </a>
+          , which taught me a lot about expanding impact beyond code—through influence, communication, cross-team collaboration, and owning invisible but critical 'glue work' that keeps engineering organizations thriving.
+        </p>
+        <p>
+          I’m based in  
+          <a href="https://maps.app.goo.gl/Auhknofv8jXCKcJB8"> 
+            <span className='p-style'> Beni Mellal, Morocco</span>
+          </a>
+          , and I enjoy learning from different people and working on projects with developers from around the world.
+        </p>
+        {// Casablanca
+        /*"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d850247.1982487019!2d-8.08456613432469!3d33.64995486382243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sfr!2sma!4v1747641946244!5m2!1sfr!2sma"
+        */}
+        {/* //beni mellal
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53940.61216473794!2d-6.414428878405399!3d32.33097013270559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda38649419c7fc1%3A0x6236b3e9a12bafd9!2sBeni-Mellal!5e0!3m2!1sen!2sma!4v1762178998704!5m2!1sen!2sma" width="100%" height="260" className="border-0" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        */}
+  </Paragraph>);
 }
 
+
 const Contact = () => {
-  const API_PATH_SUBMIT = "https://d1-prod.hichamallam.workers.dev/submit";
+  //const API_PATH_SUBMIT = "https://web_api.hichamallam.com/submit";
   const formRef = useRef(null);
   const [messageInfo, setMessageInfo] = useState({ type: '', text: '', visible: false });
 
@@ -319,7 +298,7 @@ const Contact = () => {
     };
 
     try {
-      const res = await fetch(API_PATH_SUBMIT, {
+      const res = await fetch(API_PATH_SUBMIT+"/submit", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -338,16 +317,7 @@ const Contact = () => {
   };
 
   return (<>
-    <Paragraph pid="contact" title="Contact Me">
-      <p className='lg:mt-10'>
-        If you have any questions, ideas, feel free to reach out. <br />
-        You can email us directly at:
-        <a className='contact-email inline' href="mailto:hichamallam02@gmail.com">
-          hichamallam02@gmail.com
-        </a><br />
-        Or simply leave us a message below.
-      </p>
-    </Paragraph>
+    <Paragraph pid="contact" title="Contact Me"/>
 
     <div className="flex items-center justify-center px-4 py-10 mt-0">
       <div className="w-full max-w-xl bg-[linear-gradient(140deg,#0d0d0d_0%,#1a1a1a_30%,#44107A_60%,oklch(21%_0.006_285.885)_90%)] p-8 rounded-xl shadow-lg">
@@ -359,19 +329,19 @@ const Contact = () => {
           : 'hidden'}`}>{messageInfo.text}</div>
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 text-black">
           <div>
-            <label htmlFor="full_name" className="block text-sm font-medium mb-1">Full Name</label>
-            <input type="text" id="full_name" name="full_name" placeholder='Full Name' required
+            <label htmlFor="full_name" className="block text-sm font-medium mb-1"></label>
+            <input type="text" id="full_name" name="full_name" placeholder='Name' required
               className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C84C30]" />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium mb-1"></label>
             <input type="email" id="email" name="email" placeholder='Email' required
               className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C84C30]" />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
+            <label htmlFor="message" className="block text-sm font-medium mb-1"></label>
             <textarea id="message" name="message" rows="5" placeholder='Message' required
               className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C84C30]" />
           </div>
@@ -384,11 +354,17 @@ const Contact = () => {
       </div>
     </div>
 
-    <p className='text-white text-center my-10'>
+    <p className='text-center text-white'>
+        If you have any questions, ideas, feel free to reach out.<br></br> You can email us directly at:
+      <a className='contact-email inline' href="mailto:hichamallam02@gmail.com">
+            <b>hichamallam02@gmail.com</b>
+      </a>
+    </p>
+    <p className='text-white text-center p-2 mb-10'>
       You can also find me on various socials,
       feel free to get it touch there too!
     </p>
-
+    
     <div className="flex flex-row max-sm:flex-col gap-1 text-indigo-500 underline">
       <a className='contact-a' href={link_twitter} target='_blank'>
         <svg className='h-10 fill-[#C84C32]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -416,7 +392,36 @@ const Contact = () => {
       </a>
     </div>
   </>);
-};
+}
+
+
+const SocialBar = () => {
+  const { isBottom, isTop } = useScrollPosition();
+
+  return(<>{!isBottom && <div className="fixed left-2 bottom-2 flex items-center gap-7 bg-zinc-900 rounded-md border border-indigo-500 border-solid p-3 px-10
+    max-sm:left-0 max-sm:bottom-0 max-sm:w-full max-sm:rounded-none max-sm:border-x-0 max-sm:border-b-0 max-sm:justify-center max-sm:gap-4 max-sm:px-4" >
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_twitter} target='_black'>
+        <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill='#C84C32'><path d={svg_twitter}/></svg>
+      </a>
+      <div className="h-5 w-px bg-stone-500"></div>
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_githup} target='_black'>
+      <svg className='hover:fill-white/90' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill='#C84C32'><path d={svg_githup}/></svg>
+      </a>
+      <div className="h-5 w-[1.5px] bg-stone-500"></div>
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_linkedin} target='_black'>
+      <svg className='hover:fill-[#0072B1]' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill='#C84C32'><path d={svg_linkedin}/></svg>
+      </a>
+      <div className="h-5 w-[1.5px] bg-stone-500"></div>
+      <a className='w-5 hover:scale-125 duration-300 ease-in-out'
+        href={link_youtube} target='_black'>
+      <svg className='hover:fill-[#CD201F] ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='#C84C32'><path d={svg_youtube}/></svg>
+      </a>
+  </div>}</>);
+}
+
 
 const MyComponent = () => {
   const { isBottom, isTop } = useScrollPosition();
@@ -441,6 +446,24 @@ const MyComponent = () => {
   );
 };
 
+
+const Paragraph = ({ pid, title, children }) => {
+  return (<>
+    <div id={pid} className='pt-10 text-white'>
+      <div className='text-[#C84C32]'>
+        <div className='flex justify-center items-center gap-4 p-8'>
+          <img className='h-16 max-sm:h-9' src={Logo} alt="hicham allam logo" />
+          <div className='text-white text-[46px] max-sm:text-[32px]'>{title}</div>
+        </div>
+      </div>
+      <div className='px-[90px] max-sm:px-[30px] pt-0 max-sm:pt-0 flex flex-col gap-5 max-sm:px-10 max-sm:text-[16px] '>
+          {children}
+      </div>
+    </div>
+  </>);
+}
+
+
 const useScrollPosition = () => {
   const [isBottom, setIsBottom] = useState(false);
   const [isTop, setIsTop] = useState(true);
@@ -462,4 +485,33 @@ const useScrollPosition = () => {
   }, []);
 
   return { isBottom, isTop };
+};
+
+
+
+function Home() {
+  return (<>
+  <Header/>
+  <Welcome/>
+  <MyProjects/>
+  <Skills/>
+  <About/>
+  <Contact/>
+  <SocialBar/>
+  <div className="text-[12px] max-sm:text-[10px] text-white text-center bg-black mt-20 bg-gradient-to-b from-black to-transparent">
+    © 2025 hichamallam.com &middot; All rights reserved &middot; Crafted with ❤ by Hicham
+  </div>
+  </>);
+}
+
+
+const API_PATH_SUBMIT = "https://web_api.hichamallam.com";
+
+export default Home;
+
+export {
+  Header,
+  Paragraph,
+  SocialBar,
+  API_PATH_SUBMIT
 };
